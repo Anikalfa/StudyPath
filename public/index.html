@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8fafc">
+  <title>StudyPath | Find your next program</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    @media (max-width: 1100px) {
+      .filter-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .finder-layout { grid-template-columns: minmax(300px, .85fr) minmax(0, 1.15fr); }
+      .results-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 760px) {
+      .intro { min-height: 235px; padding: 40px 0 32px; }
+      .intro-stamp { width: 92px; height: 92px; margin-right: 2%; }
+      .intro-stamp strong { font-size: 15px; }
+      .filter-shell { top: 68px; padding: 0 13px; }
+      .filter-toggle { height: 42px; display: flex; align-items: center; justify-content: space-between; width: 100%; border: 0; background: white; font-weight: 700; color: var(--ink); }
+      .filter-content { display: none; padding: 0 0 12px; }
+      .filter-shell.open .filter-content { display: block; }
+      .filter-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+      .search-field { grid-column: span 2; }
+      .finder-layout { grid-template-columns: 1fr; }
+      .form-panel { padding: 18px; }
+      .results-panel { padding-top: 10px; }
+      .results-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .program-card { padding: 12px; }
+      .card-topline { flex-direction: column-reverse; }
+      .deadline { align-self: flex-start; }
+      .site-footer { margin-top: 34px; flex-direction: column; gap: 8px; }
+    }
+    @media (max-width: 500px) {
+      body { min-width: 0; }
+      .topbar { height: 58px; }
+      .topbar-note { font-size: 10px; }
+      .intro { min-height: 215px; }
+      .intro h1 { font-size: 37px; }
+      .intro-text { max-width: 290px; font-size: 13px; }
+      .intro-stamp { width: 72px; height: 72px; margin: 0; }
+      .intro-stamp span { font-size: 6px; }
+      .intro-stamp strong { font-size: 12px; }
+      .filter-shell { top: 58px; }
+      .results-grid { grid-template-columns: 1fr; }
+      .program-card { min-height: 0; }
+      .card-topline { flex-direction: row; }
+      .form-grid { gap: 12px 8px; }
+      .form-panel { padding: 15px; }
+      .budget-presets { gap: 5px; }
+      .budget-preset { padding: 6px; }
+      .budget-preset strong { font-size: 9px; }
+      .site-footer { padding-top: 15px; }
+      .detail-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .qualify-filter { flex-direction: row !important; align-items: center; gap: 8px; min-height: 36px; }
+    .qualify-filter input { width: 15px; height: 15px; margin: 0; accent-color: var(--primary); }
+  </style>
+  <link rel="stylesheet" href="polish.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="StudyPath home"><span class="brand-mark">S</span><span>StudyPath<span class="brand-dot">.</span></span></a>
+    <div class="topbar-note"><span class="status-dot"></span> Built for your next chapter</div>
+  </header>
+  <main id="top">
+    <section class="intro" aria-labelledby="page-title">
+      <div class="intro-copy"><p class="eyebrow">A clearer way forward</p><h1 id="page-title">Find a program<br><em>that fits your future.</em></h1><p class="intro-text">Explore study options around the world, shaped around your goals, budget, and English requirements.</p></div>
+      <div class="intro-stamp" aria-hidden="true"><span>YOUR</span><strong>next<br>chapter</strong><span>STARTS HERE</span></div>
+    </section>
+    <section class="filter-shell" aria-label="Filter fetched results">
+      <button id="filter-toggle" class="filter-toggle" type="button" aria-expanded="false" aria-controls="filter-content">Filters <span aria-hidden="true">+</span></button>
+      <div id="filter-content" class="filter-content"><div class="filter-grid">
+        <label>Application year<select id="filter-year"><option value="all">Any year</option><option>2026</option><option>2027</option></select></label>
+        <label>Deadline month<select id="filter-month"><option value="all">Any month</option><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select></label>
+        <label>Intake<select id="filter-intake"><option value="all">Any</option><option>Fall</option><option>Spring</option><option>Summer</option></select></label>
+        <label>Level<select id="filter-level"><option value="all">Any level</option><option>Bachelor</option><option>Master</option><option>PhD</option><option>Diploma</option><option>Other</option></select></label>
+        <label class="range-label">Max tuition <span id="tuition-value">Any</span><input id="filter-tuition" type="range" min="0" max="50000" step="1000" value="50000"></label>
+        <label>Scholarship<select id="filter-scholarship"><option value="all">All</option><option value="available">Available only</option><option value="funded">Fully funded</option></select></label>
+        <label>English proof<select id="filter-english"><option value="all">All</option><option value="moi">MOI accepted</option><option value="none">No test required</option><option value="ielts">IELTS needed</option></select></label>
+        <label>Language test<select id="filter-test"><option value="all">All</option><option>IELTS</option><option>TOEFL</option><option>Duolingo</option><option>PTE</option><option value="none">None required</option><option>Other</option></select></label>
+        <label class="qualify-filter"><input id="filter-cgpa" type="checkbox"> Show programs I qualify for</label>
+        <label>Link status<select id="filter-link"><option value="all">All</option><option value="verified">Verified only</option></select></label>
+        <label>Sort by<select id="filter-sort"><option value="deadline">Deadline soonest</option><option value="cost">Cost low to high</option><option value="ranking">Ranking</option></select></label>
+        <label class="search-field">Search<input id="filter-search" type="search" placeholder="Program or university"></label>
+      </div><button id="reset-filters" class="text-button" type="button">Reset filters</button></div>
+    </section>
+    <section class="finder-layout" aria-label="Program search">
+      <form id="finder-form" class="form-panel" novalidate>
+        <div class="section-heading"><div><p class="eyebrow">Start with you</p><h2>Your study profile</h2></div><span class="step-mark">01 / 02</span></div>
+        <p class="panel-intro">A few details help us find realistic options. No personal contact details needed.</p>
+        <div class="form-grid">
+          <fieldset class="field full-field"><legend>Target countries <span class="required-mark">Up to 3</span></legend><div class="country-select-row"><select id="country-choice" aria-label="Choose a target country"><option value="">Add a country</option><option>USA</option><option>Canada</option><option>UK</option><option>Germany</option><option>Australia</option><option>Malaysia</option><option>Japan</option><option>South Korea</option><option>China</option><option>Italy</option><option>Finland</option><option>Sweden</option><option>Netherlands</option><option>Turkey</option><option>Hungary</option><option>Any</option><option value="Other">Other country</option></select><input id="country-other" class="other-input" type="text" maxlength="40" placeholder="Enter country" aria-label="Other target country" hidden><button id="add-country" class="small-button" type="button">Add</button></div><div id="country-chips" class="chips" aria-live="polite"></div><span id="country-error" class="field-error" aria-live="polite"></span></fieldset>
+          <label>Current / last education<select id="education"><option>SSC</option><option>HSC</option><option>Diploma</option><option>A-Level</option><option>Bachelor</option><option>Master</option><option>Other</option></select><input id="education-other" class="other-input" type="text" maxlength="40" placeholder="Specify education level" hidden><span class="field-error"></span></label>
+          <div class="field"><label for="cgpa">Last result</label><div class="input-pair"><input id="cgpa" type="number" min="0" step="0.01" placeholder="e.g. 3.40" required><select id="cgpa-scale" aria-label="Result scale"><option value="4">/ 4.0</option><option value="5">/ 5.0</option><option value="100">%</option></select></div><span class="field-error"></span></div>
+          <label>Current department<select id="department"><option>CSE</option><option>EEE</option><option>BBA</option><option>Business</option><option>Science</option><option>Arts</option><option>Medical</option><option>Civil</option><option>Mechanical</option><option>Other</option></select><input id="department-other" class="other-input" type="text" maxlength="40" placeholder="Specify department" hidden><span class="field-error"></span></label>
+          <label>Next target level<select id="target-level"><option>Bachelor</option><option>Master</option><option>PhD</option><option>Diploma</option><option>Foundation</option><option>MPhil</option><option>Postdoc</option><option>Language Course</option><option>Other</option></select><input id="target-level-other" class="other-input" type="text" maxlength="40" placeholder="Specify target level" hidden><span class="field-error"></span></label>
+          <label>Target program field<select id="program-field"></select><input id="program-field-other" class="other-input" type="text" maxlength="40" placeholder="Specify program field" hidden><span class="field-error"></span></label>
+          <label class="full-field">Interest keywords <span class="optional-note">Optional</span><input id="keywords" type="text" maxlength="100" placeholder="e.g. robotics, climate science, affordable options" aria-label="Optional study interests or search keywords"></label>
+          <label>English proof<select id="english-proof"><option value="IELTS">IELTS</option><option value="TOEFL">TOEFL</option><option value="Duolingo">Duolingo</option><option value="PTE">PTE</option><option value="MOI">MOI (Medium of Instruction letter)</option><option value="NONE">No test and no MOI letter</option><option value="Other">Other</option></select><input id="english-other" class="other-input" type="text" maxlength="40" placeholder="Specify English proof" hidden><span class="field-error"></span></label>
+          <label id="english-score-wrap">Test score<input id="english-score" type="text" maxlength="20" placeholder="e.g. 6.5"></label>
+          <label id="moi-medium-wrap" hidden>Last institution medium<select id="moi-medium"><option>English</option><option>Bangla</option></select><span class="optional-note">Optional</span></label>
+          <p id="no-test-note" class="callout full-field" hidden>We will show only universities that may not require a test or letter. Verify with the university.</p>
+          <fieldset class="budget-field full-field"><legend>Yearly budget <span>Total cost, tuition + living</span></legend><div class="budget-presets" role="group" aria-label="Budget presets"><button type="button" data-budget="8000" class="budget-preset"><span>LOW</span><strong>Up to $8,000</strong></button><button type="button" data-budget="20000" class="budget-preset active"><span>MID</span><strong>$8,000–$20,000</strong></button><button type="button" data-budget="35000" class="budget-preset"><span>HIGH</span><strong>$20,000+</strong></button></div><div class="budget-control"><span class="budget-label">Adjust total</span><div class="stepper"><button id="budget-minus" type="button" aria-label="Decrease budget">−</button><input id="budget" type="number" min="500" step="500" value="20000" aria-label="Yearly budget in US dollars"><button id="budget-plus" type="button" aria-label="Increase budget">+</button></div><strong id="budget-bdt" class="bdt-value">৳2,400,000 / yr</strong></div><span class="field-error" id="budget-error"></span></fieldset>
+        </div>
+        <button id="find-button" class="primary-button" type="submit"><span>Find programs</span><span aria-hidden="true">↗</span></button><p id="form-message" class="form-message" role="alert"></p>
+      </form>
+      <section id="results-section" class="results-panel" aria-labelledby="results-title"><div class="results-heading"><div><p class="eyebrow">Your shortlist</p><h2 id="results-title">Programs for you</h2></div><div class="results-meta"><span id="cache-label" class="cache-label" hidden>From cache</span><span id="result-count">No search yet</span></div></div><div id="results" class="results-grid" aria-live="polite"><div class="empty-state"><span class="empty-icon">↗</span><h3>Your next step starts here</h3><p>Share your study profile to see programs selected for your goals.</p></div></div><nav id="pagination" class="pagination" aria-label="Program result pages" hidden></nav></section>
+    </section>
+  </main>
+  <footer class="site-footer"><p>Data is AI-generated, verify before applying. UK visas may need a separate approved English test (SELT) even if the university accepts MOI.</p><span>StudyPath <span class="brand-dot">.</span></span></footer>
+  <dialog id="details-modal" aria-labelledby="modal-title"><div class="modal-top"><p class="eyebrow">Program details</p><button id="modal-close" class="icon-button" type="button" aria-label="Close details">×</button></div><div id="modal-content"></div><div id="modal-actions" class="modal-actions"></div><p class="modal-disclaimer">Always confirm deadlines, fees and requirements on the official page before applying.</p></dialog>
+</body>
+</html>

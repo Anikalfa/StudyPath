@@ -1,0 +1,4 @@
+{
+  "allowed": [".edu", ".ac.uk", ".edu.au", ".edu.my", ".ac.jp", ".ac.kr", ".edu.cn", ".de", ".ca", ".se", ".fi", ".nl", ".it", ".hu", ".edu.tr", ".ac.bd"],
+  "blocked": ["studyportals.com", "mastersportal.com", "bachelorsportal.com", "phdportal.com", "educations.com", "hotcoursesabroad.com", "shiksha.com", "leverageedu.com", "applyboard.com", "yocket.com", "facebook.com", "linkedin.com", "youtube.com"]
+}
