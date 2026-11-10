@@ -20,7 +20,7 @@ StudyPath helps students explore study options around the world. Describe your a
 
 No personal contact details are required.
 
-![StudyPath – study profile and personalized shortlist](images/uni_2.png)
+![StudyPath – study profile and personalized shortlist](images/uni2.png)
 
 ## Features
 
